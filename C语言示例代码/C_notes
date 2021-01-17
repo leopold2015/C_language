@@ -1,0 +1,5 @@
+编译器：gcc
+hello.c
+c源文件--预处理--编译--汇编--链接--可执行文件
+hello.c--hello.i--hello.s--hello.o--hello
+
