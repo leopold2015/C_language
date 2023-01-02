@@ -7,9 +7,25 @@ xx指库名
 
 ar -cr libxx.a yyy.o
 
-发不到
+发布到
 /usr/local/include
 /usr/local/lib
 
 gcc -L/usr/local/lib -o main main.o -lxx
 -l参数必须在最后，有依赖
+
+
+动态库
+libxxx.so
+
+gcc -shared -fpic -o libxx.so yyy.o
+
+发布到
+/usr/local/include
+/usr/local/lib
+
+在/etc/ld.so.conf中添加路径
+/sbin/ldconfig  重读 /etc/ld.so.conf
+
+gcc -I/usr/local/include -L/usr/local/lib -o ... -lxx
+
