@@ -19,10 +19,14 @@ int main(int argc, char **argv)
         perror("fopen()");
         exit(1);
     }
-    while(fgetc(fp) != EOF)
+    fseek(fp, 0, SEEK_END);
+    count = ftell(fp);
+
+    /*while(fgetc(fp) != EOF)
     {
         count ++;
     }
+    */
 
     printf("count = %d\n", count);
 
