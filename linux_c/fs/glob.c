@@ -33,5 +33,7 @@ int main(int argc, char ** argv)
         puts(globres.gl_pathv[i]);
     }
 
+    globfree(&globres);
+
     exit(0);
 }
