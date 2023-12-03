@@ -15,6 +15,201 @@ fputc()
 fgets()
 fputs()
 
+fread()
+fwrite()
+
+printf()
+scanf()
+
+fseeko
+ftello
+
+fseek
+ftell
+rewind   equel to feek(stream, 0, SEEK_SET)
+
+fflush()
+
+getline();
+
+临时文件:1,如何不冲突  2,及时销毁
+    tmpnam  不能安全地创建临时文件
+    tmpfile  以二进制的读写方式打开一个临时文件
+
+fgets----------------------------------
+#define SIZE   5
+char buf[SIZE];
+fgets(buf, SIZE, stream);
+
+size - 1
+'\n'
+
+abcd
+以'\n'为结尾读取
+1-> a b c d '\0'
+2-> '\n' '\0'.....
+fputs---------------------------
+
+fread ---------------------------
+fread(buf, size, nmemb, fp);
+
+1->数据量足够，数据量很多
+
+fread(buf, 1, 10, fp);
+1-> 返回值10 -> 10byte
+2-> 5 ->5byte
+
+fread(buf, 10, 1, fp);
+1-> 返回值1-> 10 byte
+2-> 0 ->> ???
+
+fwrite --------------------------
+
+fseek-----------------------------
+fp = fopen();
+
+fputc(fp) * 10
+fseek(fp, 0, SEET_CUR);
+
+fgetc(fp) * 10
+
+
+文件IO/系统调用IO
+文件描述符（fd，file descriptor）是在文件IO中贯穿始终的类型
+
+文件描述符的概念
+（整形数，数组下标，文件描述符优先使用下标）
+fopen--->open
+FILE--->创建结构体，带pos
+open的结构体，有pos以及count，count来防止野指针的出现
+
+
+文件IO操作，open，close，read，write，lseek
+将文件IO与标准IO的区别
+举例：传达室老大爷跑邮局，标准io要刷新，文件io实打实的原子操作，kenal级的操作
+区别：响应速度&吞吐量
+面试：如何使一个程序变快？
+提醒：标准io和文件io不可混用
+FILE *fp；
+fputc(fp) -> pos++
+fputc(fp) -> pos++
+
+IO的效率问题
+习题，将mycopy.c程序进行更改，将BUFFERSIZE的值改打，并观察进行拷贝的时间。
+注意性能最佳挂点出现时BUFFERSIZE值，以及何时程序会出问题。
+time执行，统计执行时间
+
+文件共享:多个任务共同操作一个文件，，完成文件修改
+面试：写程序删除一个文件的第10行。
+while()
+{
+lseek  11  +  read  +  lseek  +   write
+}
+------------------------------
+1->open r  -> fd1 -> lseek 11
+2->open r+ -> fd2 - lseek 10
+while()
+{
+1->fd1->read
+2->fd2->write
+}
+------------------------------
+process1-open->r
+process2->open->r+
+
+p1->read -> p2 ->write
+------------------------------
+补充一个函数：truncate
+
+
+
+原子操作：不可分割的操作
+原子：不可分割的最小单位
+原子操作的作用：解决竞争和冲突
+如tmpnam（创建临时文件的函数）
+
+
+程序中的重定向：dup，dup2
+
+
+同步：sync，fsync，fdatasync
+
+
+设备级别的控制调用
+fcntl():文件描述符所变的魔术几乎都来源于该函数
+ioctl():设备相关的内容
+/dev/fd/目录：虚目录，当前进程的文件描述符
+
+/*****我是华丽的分割线**********************************************/
+文件系统
+类似ls的实现，如myls
+一、目录和文件
+1、获取文件属性
+stat,通过文件路径获取属性，面对符号链接文件时获取的是所指向的目标文件的属性
+fstat,通过文件描述符获取属性
+lstat，面对符号链接文件时获取的是符号链接文件的属性
+2、文件访问权限
+st_mode是一个16位的位图，用于表示文件类型，文件访问权限及特殊权限位
+3、umask
+0666 & ~umask
+作用：防止产生权限过松的文件
+4、文件权限的更改、管理
+chmod a+x big.c,增加文件的运行权限
+chmod()
+fchmod()
+5、粘住位
+t位，给某一个目录设置t位，例如/tmp
+
+6、文件系统：FAT，UFS
+文件系统，文件或数据的存储和管理
+
+7、硬链接，符号链接
+硬连接与目录项是同义词，且寄哪里硬链接有限制：不能给分区建立，不能给目录建立。
+符号链接优点：可跨分区，可以给目录建立
+ln
+ln -s
+link()
+unlink()
+remove()
+rename()
+8、utime
+修改文件的最后读的时间和修改的时间
+9、目录的创建与销毁
+mkdir
+rmdir
+10、更改当前工作路径
+chdir---->cd命令
+fchdir
+chroot
+getcwd,获取当前路径----pwd
+11、分析目录、读取目录内容
+glob()：当前目录下某个格式的所有文件，解析模式、通配符
+
+opendir()
+closedir()
+readdir(3)
+rewinddir()
+seekdir()
+telldir()
+
+
+
+二、系统数据文件和信息
+1,/etc/passwd
+getpwuid()
+getwnam()
+2/etc/group
+getgrgid()
+getgrgrnam()
+3/etc/shadow
+getspnam()
+getspent()
+crypt()加密
+getpass()
+4时间戳
+
+三、进程环境
+
 
 
 
