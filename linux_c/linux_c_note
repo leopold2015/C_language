@@ -206,10 +206,60 @@ getspnam()
 getspent()
 crypt()加密
 getpass()
-4时间戳
+
+4时间戳 time_t, char *, struct time
+time();
+gmtime();
+localtime();
+mktime()
+strftime()
+
 
 三、进程环境
+1，main函数
+int main(int argc, char **argv)
+2，进程终止
+正常终止：
+    main函数返回
+    调用exit
+    调用_exit或者_Exit
+    最后一个线程从其启动例程返回
+    最后一个线程调用pthread_exit
+异常终止：
+    调用abort
+    接到一个信号并终止
+    最后一个线程对其取消请求做出响应
 
+atexit(),on_exit钩子函数
+fd1 = open()
+
+
+
+3，命令行参数的分析
+    getopt();
+    getopt_long();
+
+
+4，环境变量
+key = value
+getenv
+setenv
+putenv
+
+5，C程序的存储空间布局
+pmap pid
+
+6，库
+动态库
+静态库
+手工装载库，
+dlopen
+dlclose
+dlerror
+dlsym
+
+7，函数跳转
+8，资源的获取及控制
 
 
 
