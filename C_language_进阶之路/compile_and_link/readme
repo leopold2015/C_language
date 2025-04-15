@@ -1,0 +1,39 @@
+gcc aredistinct.c main.c -o prog
+
+if you want to use gdb or ddd, -g option is needed
+gcc -g -Wall -Wshadow aredistinct.c main.c -o prog
+
+compile the .c document and then combine them
+
+gcc -g -Wall -Wshadow aredistinct.c 
+gcc -g -Wall -Wshadow main.c
+gcc -g -Wall -Wshadow aredistinct.o mina.o -o prog 
+
+
+
+### make tool
+
+areDistinct.o : areDistinct.c
+    gcc -g -Wall -Wshadow -c areDistinct.c
+
+main.o : main.c
+    gcc -g -Wall -Wshadow -c main.c
+
+### add test to Makefile
+test0: prog
+    ./prog inputs/input0 > outputs/output0
+    diff exected/expected0 outputs/output0
+
+when testing, execute the following commond 
+    make test0
+
+### delete 
+    rm -rf *.o prog outputs/*
+
+
+### valgrind check memory visit problem
+    for example
+    gcc -g -Wall -Wshadow wrongindex.c -o wrongindex
+    valgrind --tool=memcheck --verbose --log-file ./wrongindex
+
+
