@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "fcntl.h": "c",
-        "__config": "c"
+        "__config": "c",
+        "person.h": "c"
     }
 }
